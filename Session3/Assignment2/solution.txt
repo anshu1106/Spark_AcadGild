@@ -1,0 +1,6 @@
+1> val simplePairRDD = sc.parallelize(List((1, 2), (3, 4), (3, 6)))
+
+
+
+2>val transformRDD = sc.parallelize(List("a","b","c","d","e"))
+   val indexed = transformRDD.zipWithIndex()
