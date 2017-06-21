@@ -1,0 +1,13 @@
+1>
+def isPrime(n:Int) = (2 until n) forall(n % _!=0)
+val numbersRDD = sc.parallelize(2 to 100 toList)
+val primeNumbersRDD = numbersRDD.filter(i=> isPrime(i))
+
+
+
+2>
+
+val numbersRDD = sc.parallelize(1 to 100 toList)
+val evenNumbersRDD = numbersRDD.filter(i=>i%2==0)
+evenNumbersRDD.map(i=> math.sqrt(i))
+

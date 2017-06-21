@@ -1,0 +1,7 @@
+1>val numbersListRDD = sc.parallelize(1 to 10 toList)
+	val sumRDD = numbersListRDD.reduce((x,y)=>x+y)
+	var average = sumRDD.toFloat/numbersListRDD.count()
+
+2>val numbersFileRDD = sc.textFile("/tmp/numbers.txt")
+	val sumRDD =numbersFileRDD.reduce((x,y)=>x+y)
+	var average = sumRDD.toFloat/numbersFileRDD.count()
