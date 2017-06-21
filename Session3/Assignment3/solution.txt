@@ -1,0 +1,4 @@
+val collectionList = 1 to 100 toList
+val collectionRDD = sc.parallelize(collectionList)
+val cubeRDD = collectionRDD.map(i=> i*i*i)
+val filteredRDD = cubeRDD.filter(i=> i%2==0 | i%3==0)
