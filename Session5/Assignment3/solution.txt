@@ -1,0 +1,12 @@
+1. Network shuffle happens for map operation.
+No
+
+2. Network shuffle happens for groupByKey operation.
+yes
+
+3. Lower level scheduler will schedule data based on locality.
+yes
+4. Partial aggregation increases data movement.
+no
+5. Transformations are executed on the Spark Workers.
+yes

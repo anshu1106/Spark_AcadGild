@@ -1,0 +1,13 @@
+1> Generate movie name and its duration
+
+val movieFile = sc.textFile("/tmp/movies.txt") //reads the data file from hdfs
+val nameDurationFile = movieFile.filter { x => {if(x.toString().split(",").length >= 5) true else false} }.map(line=>{line.toString().split(",")}) // splits input line on comma
+
+val fileRDD = nameDurationFile.map(x=> { (x(1),x(4))})// extracts movie name and duration
+
+
+2>How many distinct movies are there?
+val uniqueNames = fileRDD.map(i=>i._1).distinct // used distinct operator to get distinct movie names
+uniqueNames.count()
+10
+Array(Night Tide, Orphans of the Storm, Nick of Time, The Nightmare Before Christmas,  Mother's Boys, The Object of Beauty, Muriel's Wedding, One Magic Christmas, Nosferatu: Original Version)

@@ -1,0 +1,26 @@
+1. What is RDD Lineage?
+
+RDD Lineage is a graph of all the parent RDDs of a RDD. It is built as a result of applying transformations to the RDD and creates a logical execution plan.
+
+2. What is Spark behavior in following Scenario?
+
+Consider a cluster of 100 nodes and your application has 10 transformations. One of the
+
+node fails or disconnects from the cluster during the execution.
+
+A- Spark master or resource manager takes care of redistributing the failed node partition data to some other node.
+It creates a new RDD from the partition data and execute the task.
+
+3. How do you control parallelism in applications?
+
+By distributing data across multiple nodes and spawning process to execute tasks on the data
+
+4.4. What is the difference between map and mapPartitions?
+RDD.map maps a function to each element of an RDD, whereas RDD.mapPartitions maps a function to each partition of an RDD.
+MapPartition is a specialized map that is called only once for each partition. The entire content of the respective partitions is available as a sequential stream of values via the input argument 
+
+5. What are the benefits of Spark Architecture?
+a>-Faster batch processing than MapReduce. Spark executes batch-processing jobs 10 to 100 times faster than MapReduce.
+b> Spark comes with GraphX, spark streaming, machine learning libraries and spark sql.
+c>Apache streaming is suitable for many realtime analytics use cases
+d>Supports multiple languages
