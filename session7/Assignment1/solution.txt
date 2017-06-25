@@ -1,0 +1,13 @@
+1. Store data in sequence file format
+
+val data = sc.parallelize(List(("key1", 1), ("Kay2", 2), ("Key3", 2)))
+data.saveAsSequenceFile("/tmp/seq-output")
+
+
+
+2. Read sequence file data
+import org.apache.hadoop.io.Text
+import org.apache.hadoop.io.IntWritable
+val result = sc.sequenceFile("/tmp/seq-output/part-00001", classOf[Text], classOf[IntWritable]). map{case (x, y) => (x.toString, y.get())}
+result.collect
+
