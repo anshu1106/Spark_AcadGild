@@ -1,0 +1,31 @@
+1>When running Spark on Yarn, do you need to install Spark on all nodes of Yarn Cluster?
+yes
+
+2. Explain the life cycle of a Spark program
+
+The "driver program" is launched (this is your program)
+The driver waits the launching of the Application Master task to YARN or Mesos or Spark resource manager (it is a matter of config params at spark-submit, what manager it uses)
+Application Master allocates tasks in the cluster, according to locality, resource requirements, and nodes available ram and cpu
+The "slave" tasks (workers) receive input splits to process
+The slave tasks write result files
+The job finishes and control returns to the driver program which can continue with new local processing or new cluster processing
+
+3. What are transformations and actions. What is the difference between them in terms of exe-
+cution?
+Transformations are lazy operations on a RDD that create one or many new RDDs, e.g. map, filter, reduceByKey, join
+In other words, transformations are functions that take a RDD as the input and produce one or many RDDs as the output. They do not change the input RDD (since RDDs are immutable and hence cannot be modified), but always produce one or more new RDDs by applying the computations they represent.
+By applying transformations you incrementally build a RDD lineage with all the parent RDDs of the final RDD(s).
+Transformations are lazy, i.e. are not executed immediately. Only after calling an action are transformations executed.
+
+
+Transformations create RDDs from each other, but when we want to work with the actual dataset, at that point action is performed. When the action is triggered after the result, new RDD is not formed like transformation. Thus, actions are RDD operations that give non-RDD values. The values of action are stored to drivers or to the external storage system. It brings laziness of RDD into motion.
+examples : take, collect,count
+
+
+4. In what scenarios can Spark be used more?
+A few, common and popular use cases of Spark include campaigns related to real time marketing, online product recommendations, cyber security analytics and machine log monitoring.
+
+5. What makes Spark 10-100x times faster than Hadoop?
+1. One of the main limitations of MapReduce is that it persists the full dataset to HDFS after running each job.  This is very expensive, because it incurs both three times (for replication) the size of the dataset in disk I/O and a similar amount of network I/O.  Spark takes a more holistic view of a pipeline of operations.  When the output of an operation needs to be fed into another operation, Spark passes the data directly without writing to persistent storage.  This is an innovation over MapReduce that came from Microsoft's Dryad paper, and is not original to Spark.
+
+2. The main innovation of Spark was to introduce an in-memory caching abstraction.  This makes Spark ideal for workloads where multiple operations access the same input data.  Users can instruct Spark to cache input data sets in memory, so they don't need to be read from disk for each operation. 
