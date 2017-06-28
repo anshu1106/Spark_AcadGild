@@ -1,0 +1,4 @@
+val sqlcontext = new org.apache.spark.sql.SQLContext(sc) // creates sql context from spark context
+
+val vfile = sqlcontext.read.json("/tmp/test.json") //reads json file from hdfs
+

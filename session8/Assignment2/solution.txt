@@ -1,0 +1,8 @@
+val movieFile = sc.textFile("/tmp/movies.csv") //reads the data file from hdfs
+val header = movieFile.first()
+
+val movieFileWithoutHeader = movieFile.filter(row => row != header)
+val nameDurationFile = movieFileWithoutHeader.filter { x => {if(x.toString().split(",").length >= 5) true else false} }.map(line=>{line.toString().split(",")}) // splits input line on comma
+
+val fileRDD = nameDurationFile.map(x=> { (x(1),x(4))})// extracts movie name and duration
+
