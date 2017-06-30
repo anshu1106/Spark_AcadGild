@@ -1,0 +1,44 @@
+1>scala> import org.apache.spark.sql.SQLContext
+import org.apache.spark.sql.SQLContext
+
+scala> val sqlContext = new SQLContext(sc)
+sqlContext: org.apache.spark.sql.SQLContext = org.apache.spark.sql.SQLContext@47b4fcd5
+
+scala> val df = sqlContext.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("/tmp/movies_data.csv")
+df: org.apache.spark.sql.DataFrame = [id: int, name: string, year: int, rating: double, duration: int]
+
+scala> df.filter(df("year")=== 2012).filter(df("rating")>=4).show()
++---+----+----+------+--------+
+| id|name|year|rating|duration|
++---+----+----+------+--------+
++---+----+----+------+--------+
+
+2.
+
+scala> df.groupBy("year").count().show()
++----+-----+                                                                    
+|year|count|
++----+-----+
+|1913|    1|
+|1914|   17|
+|1915|    1|
+|1916|    1|
+|1919|    1|
+|1920|    5|
+|1921|    2|
+|1922|    1|
+|1923|    4|
+|1924|    3|
+|1925|    5|
+|1926|    2|
+|1927|    4|
+|1928|    2|
+|1929|    5|
+|1930|    4|
+|1931|    2|
+|1932|    3|
+|1933|    3|
+|1934|    2|
++----+-----+
+only showing top 20 rows
+

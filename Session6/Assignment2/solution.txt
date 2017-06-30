@@ -1,0 +1,25 @@
+1. What is difference cache and persist operation?
+
+With cache(), you use only the default storage level MEMORY_ONLY. With persist(), you can specify which storage level you want.
+Use persist() if you want to assign another storage level than MEMORY_ONLY to the RDD
+
+2. What is the equivalent of Accumulators in MapReduce?
+
+Counters
+
+3. What is the equivalent of Broadcast variables in MapReduce?
+
+map-side joins
+
+4. How spark allocates the available memory during processing?
+
+• If RDD fits in memory, choose MEMORY_ONLY
+• If not, use MEMORY_ONLY_SER w/ fast serializatimon library
+• Don’t spill to disk unless functions that computed the datasets are very expensive or they
+filter a large amount of data. (re-computing may be as fast as reading from disk)
+• Use replicated storage levels sparingly and only if you want fast fault recovery (maybe to
+serve requests from a web app)
+
+5. How to recover the data from cached RDDs?
+The cache is fault-tolerant: if any partition of an RDD is lost, it will automatically
+be recomputed using the transformations that originally created it

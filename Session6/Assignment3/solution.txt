@@ -1,0 +1,64 @@
+1>
+scala> import org.apache.spark.sql.functions._
+import org.apache.spark.sql.functions._
+
+scala> df.sort(desc("duration"))
+res13: org.apache.spark.sql.DataFrame = [id: int, name: string, year: int, rating: double, duration: int]
+
+scala> df.sort(desc("duration")).show()
++-----+--------------------+----+------+--------+
+|   id|                name|year|rating|duration|
++-----+--------------------+----+------+--------+
+|12304|Example 8 Hour 23...|2010|   3.2|   28813|
+|22217|Example 8 Hour 23...|2010|   3.0|   28813|
+| 2424|   The Best of Youth|2003|   3.9|   22024|
+|22382|      Heaven's Story|2010|   2.3|   16736|
+| 1832|Dr. Mabuse: The G...|1922|   3.1|   16422|
+|   93|       Heaven's Gate|1980|   3.0|   13143|
+|  612|         Mohabbatein|2000|   3.8|   12966|
+|  719|       War and Peace|1956|   3.6|   12500|
+| 2126|       Boccaccio '70|1962|   2.9|   12235|
+|   13|The Birth of a Na...|1915|   2.9|   12118|
+|  535|             Refugee|2000|   3.3|   11983|
+|  369|         Intolerance|1916|   3.2|   11873|
+|14678|Apocalypse Now Redux|2001|   4.2|   11758|
+| 1950|              Swades|2004|   3.9|   11718|
+|  140|                Reds|1981|   3.5|   11710|
+|  291|             Titanic|1997|   3.8|   11691|
+| 2067|          Veer-Zaara|2004|   3.9|   11562|
+| 8412|     United Red Army|2007|   2.5|   11419|
+| 1649|Dilwale Dulhania ...|1995|   4.0|   11390|
+|12378|The Autobiography...|2010|   2.5|   11277|
++-----+--------------------+----+------+--------+
+only showing top 20 rows
+
+
+2>
+
+scala> df.filter(df("year")===1995).sort(desc("rating")).show()
++-----+--------------------+----+------+--------+
+|   id|                name|year|rating|duration|
++-----+--------------------+----+------+--------+
+|  491|          Braveheart|1995|   4.2|   10658|
+| 6531|Law &#38; Order: ...|1995|   4.0|    null|
+| 1247|House of Cards Tr...|1995|   4.0|    null|
+|15760|Beakman's World: ...|1995|   4.0|    null|
+| 1848|            The Cure|1995|   4.0|    5915|
+| 1371|The X-Files: Seas...|1995|   4.0|    null|
+| 1649|Dilwale Dulhania ...|1995|   4.0|   11390|
+|17897|  Star Trek: Voyager|1995|   3.9|    null|
+|   58|           Desperado|1995|   3.9|    6269|
+| 1394|Star Trek: Deep S...|1995|   3.9|    null|
+| 1623|Star Trek: Voyage...|1995|   3.9|    null|
+| 1784|A Touch of Frost:...|1995|   3.9|    null|
+| 1521|Star Trek: Voyage...|1995|   3.9|    null|
+| 1148|Cry  the Beloved ...|1995|   3.8|    6374|
+|  320|Trinity &#38; Bey...|1995|   3.8|    5620|
+| 1611|     Prime Suspect 4|1995|   3.8|    null|
+|  135|          Pocahontas|1995|   3.8|    4864|
+| 1630|Highlander: Season 4|1995|   3.8|    null|
+|12814|             Sliders|1995|   3.8|    null|
+| 1658|   Frasier: Season 3|1995|   3.8|    null|
++-----+--------------------+----+------+--------+
+only showing top 20 rows
+
